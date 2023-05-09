@@ -1,0 +1,14 @@
+{
+    "id": "1234567890",
+    "client": {
+        "name": "Jame",
+        "surname": "Cameron",
+        "age": 60
+    },
+    "list":[
+        "dog",
+        "cat",
+        "bird",
+        "fish"
+    ]
+}

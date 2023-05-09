@@ -1,15 +1,58 @@
 package main
 
 import (
+	"adirak/godatabus/bus"
+	"encoding/json"
+	"io/ioutil"
+	"os"
 	"testing"
 )
 
-func TestJsonPathRead(t *testing.T) {
+// Read json map function
+func JsonMap(file string) map[string]any {
 
-	// root := bus.NewBus()
+	jsonFile, err := os.Open(file)
+	if err != nil {
+		panic(err)
+	}
+	bValue, err := ioutil.ReadAll(jsonFile)
+	if err != nil {
+		panic(err)
+	}
 
-	// path := "x.y.z.a.'b.c'"
-	// paths := root.SplitPath(path)
+	mapObj := map[string]any{}
+	json.Unmarshal(bValue, &mapObj)
 
-	// t.Error(paths)
+	return mapObj
+
+}
+
+func TestDatabus(t *testing.T) {
+
+	file := "./sample/test_databus.json"
+	data := JsonMap(file)
+
+	root := bus.NewBusWithMap(&data)
+
+	str := root.String("id")
+	num := root.Int("id")
+	strL := root.String("list[2]")
+
+	root.Set("list[5]", "buffalo")
+	list := root.Value("list")
+
+	root.Set("myList[0].a", "aaa")
+	root.Set("myList[0].b", "bbb")
+	root.Set("myList[0].c", "ccc")
+	myList := root.Value("myList")
+
+	root.Set("'x.y.z'", "XYZ")
+	xyz := root.String("'x.y.z'")
+
+	t.Log("str:", str)
+	t.Log("num:", num)
+	t.Log("strL:", strL)
+	t.Log("list:", list)
+	t.Log("myList:", myList)
+	t.Log("xyz:", xyz)
 }

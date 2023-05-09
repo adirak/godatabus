@@ -171,8 +171,8 @@ func (c *Databus) set(path string, value interface{}) error {
 
 }
 
-// Delete is function to delete value by path
-func (c *Databus) Delete(path string) error {
+// del is function to delete value by path
+func (c *Databus) del(path string) error {
 
 	paths := c.splitPath(path)
 	if len(paths) == 0 {

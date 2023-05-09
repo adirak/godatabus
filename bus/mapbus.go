@@ -18,6 +18,18 @@ func NewBus() *Databus {
 	return &sm
 }
 
+// NewBus is function to create new databus
+func NewBusWithMap(databus *map[string]any) *Databus {
+
+	if databus == nil {
+		return NewBus()
+	}
+	sm := Databus{}
+	v := *databus
+	sm.v = v
+	return &sm
+}
+
 // GetRoot is function to get root map
 func (c *Databus) GetRoot() map[string]any {
 	return c.getRoot()
@@ -154,4 +166,32 @@ func (c *Databus) Array(path string) []any {
 	}
 
 	return val
+}
+
+// Set is function to set value to path
+func (c *Databus) Set(path string, value any) {
+
+	// Locking
+	c.mu.Lock()
+	defer c.mu.Unlock()
+
+	// call set value
+	err := c.set(path, value)
+	if err != nil {
+		panic(err)
+	}
+}
+
+// Del is function to delete value by path
+func (c *Databus) Del(path string) {
+
+	// Locking
+	c.mu.Lock()
+	defer c.mu.Unlock()
+
+	// call set value
+	err := c.del(path)
+	if err != nil {
+		panic(err)
+	}
 }
