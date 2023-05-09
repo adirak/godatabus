@@ -44,6 +44,7 @@ func TestDatabus(t *testing.T) {
 	root.Set("myList[0].a", "aaa")
 	root.Set("myList[0].b", "bbb")
 	root.Set("myList[0].c", "ccc")
+	root.Set("myList[0].d", "ddd")
 	myList := root.Value("myList")
 
 	root.Set("'x.y.z'", "XYZ")
