@@ -1,11 +1,12 @@
 package main
 
 import (
-	"adirak/godatabus/bus"
 	"encoding/json"
 	"io/ioutil"
 	"os"
 	"testing"
+
+	"github.com/adirak/godatabus/bus"
 )
 
 // Read json map function

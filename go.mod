@@ -1,4 +1,4 @@
-module adirak/godatabus
+module github.com/adirak/godatabus
 
 go 1.18
 
